@@ -12,7 +12,7 @@ void Buffer::to_empty() {
     msg = "";
 }
 
-void Buffer::enter_message(char* value){
+void Buffer::enter_message(std::string value){
     msg += value;
 }
 
