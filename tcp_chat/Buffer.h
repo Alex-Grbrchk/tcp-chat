@@ -9,6 +9,6 @@ class Buffer{
     Buffer();
     void to_empty();
     void enter_name(std::string value);
-    void enter_message(char* value);
+    void enter_message(std::string value);
     std::string get_message();
 };
