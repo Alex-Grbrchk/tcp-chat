@@ -12,4 +12,4 @@ Biuld steps for client:
 1. g++ -c Buffer.cpp
 2. g++ -c Client.cpp
 3. g++ -c Chat.cpp
-4. g++ -o client errors.o Buffer.o Client.o Chat.o
+4. g++ -o client errors.o Buffer.o Client.o Chat.o -lpthread
