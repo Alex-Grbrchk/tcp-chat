@@ -20,8 +20,6 @@ void handle_client(int client_socket, std::vector<int>& client_sockets);
 
 int main(int argc, char const* argv[] ){
 
-    int server_socket;
-
     int server_fd = Socket(AF_INET, SOCK_STREAM, 0);
     struct sockaddr_in server_adr{0};
     server_adr.sin_family = AF_INET;
@@ -45,7 +43,7 @@ int main(int argc, char const* argv[] ){
         client_thread.detach();
     }
 
-    close(server_socket);
+    
     shutdown(server_fd, SHUT_RDWR);
     return 0;
 }
@@ -92,16 +90,23 @@ void handle_client(int client_socket, std::vector<int>& client_sockets) {
         client_sockets.erase(it);
     }*/
 
+    for(int i = 0; i < client_sockets.size(); i++) {
+        if(client_sockets[i] == client_socket){
+        client_sockets.erase(client_sockets.begin()+i);
+        break;
+    }   
+    
+}
+
     close(client_socket);
 }
 
 bool is_client_connection_closed(const char* msg) {
-// Check if the message contains the client close connection symbol
-for (int i = 0; i < strlen(msg); i++) {
-if (msg[i] == CLIENT_CLOSE_CONNECTION_SYMBOL) {
-return true;
+    // Check if the message contains the client close connection symbol
+    for (int i = 0; i < strlen(msg); i++) {
+        if (msg[i] == CLIENT_CLOSE_CONNECTION_SYMBOL) {
+            return true;
+        }
+    }   
+    return false;
 }
-}
-return false;
-}
-
