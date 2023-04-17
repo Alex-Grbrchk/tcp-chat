@@ -1,0 +1,26 @@
+all: client
+
+client: errors.o Buffer.o Client.o Chat.o
+	g++ errors.o Buffer.o Client.o Chat.o -o client -lpthread
+
+
+Chat.o:
+	g++ -c Chat.cpp
+	
+Client.o:
+	g++ -c Client.cpp
+
+Buffer.o:
+	g++ -c Buffer.cpp
+
+errors.o:
+	g++ -c errors.cpp
+
+clean:
+	rm -rf *.o client
+	
+install:
+	install ./client /usr/local/bin
+
+uninstall:
+	rm -rf /usr/local/bin/client

@@ -1,0 +1,19 @@
+all: server
+
+server: errors.o Server.o
+	g++ errors.o Server.o -o server -lpthread
+
+Server.o: Server.cpp
+	g++ -c Server.cpp
+
+errors.o:
+	g++ -c errors.cpp	
+
+clean:
+	rm -rf *.o server
+	
+install:
+	install ./server /usr/local/bin
+
+uninstall:
+	rm -rf /usr/local/bin/server
